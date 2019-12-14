@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
     public Button btnGetCard;
     [Header("結束畫面")]
     public GameObject goFinal;
-    
+    [Header("失敗結束畫面")]
+    public GameObject goFinal2;
+    [Header("平手結束畫面")]
+    public GameObject goFinal3;
 
     private int player, pc;     // 玩家、電腦卡片編號
 
@@ -75,11 +78,31 @@ public class GameManager : MonoBehaviour
     /// 電腦卡片編號：pc
     /// 顯示結算畫面
     /// </summary>
-    private void GameWinner()
+private void GameWinner()
     {
-        goFinal.SetActive(true);//顯示結算畫面
+
+        if (player > pc)
+        {
+            goFinal.SetActive(true);//顯示結算畫面
+            print("贏ㄌ!!");
+            aud.PlayOneShot(soundWin);
 
         }
+        if (player < pc)
+        {
+            print("輸ㄌ~");
+            goFinal2.SetActive(true);//顯示結算畫面
+            aud.PlayOneShot(soundLose);
+        }
+        if (player == pc)
+        {
+            print("平手");
+            goFinal3.SetActive(true);//顯示結算畫面
+            aud.PlayOneShot(soundTie);
+        }
+
+    }
+
     /// <summary>
     /// 重新遊戲
     /// </summary>
@@ -87,6 +110,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("練習場景");
     }
+
 
     }
     #endregion
