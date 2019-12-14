@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +10,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] cards;
     [Header("發牌按鈕")]
     public Button btnGetCard;
+    [Header("結束畫面")]
+    public GameObject goFinal;
     
+
     private int player, pc;     // 玩家、電腦卡片編號
 
     private void Start()
@@ -62,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     private AudioSource aud;        // 音效來源：喇叭
 
+    public GameObject GoFinal { get => goFinal; set => goFinal = value; }
 
     /// <summary>
     /// 勝負顯示：使用玩家與電腦取得卡片判斷獲勝、平手或失敗
@@ -71,7 +77,19 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void GameWinner()
     {
-        
+        goFinal.SetActive(true);//顯示結算畫面
+
+        }
+    /// <summary>
+    /// 重新遊戲
+    /// </summary>
+    public void Replay()
+    {
+        SceneManager.LoadScene("練習場景");
+    }
+
     }
     #endregion
-}
+
+
+
